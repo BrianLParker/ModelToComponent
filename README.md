@@ -14,7 +14,7 @@ Blazor Model to Component Mapper
 
 ```NavItemView.razor```
 
-Note the inheritance of ViewComponentBase<TModel> 
+Note the inheritance of ```ViewComponentBase<TModel>```
 
 ```
 @inherits ViewComponentBase<NavItem>
