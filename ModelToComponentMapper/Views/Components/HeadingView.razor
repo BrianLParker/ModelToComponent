@@ -1,0 +1,24 @@
+﻿@inherits ViewComponentBase<Heading>
+@switch (Model.Level)
+{
+    case HeadingLevel.One:
+        <h1 @attributes="Model.InputAttributes">@Model.Text</h1>
+        break;
+    case HeadingLevel.Two:
+        <h2 @attributes="Model.InputAttributes">@Model.Text</h2>
+        break;
+    case HeadingLevel.Three:
+        <h3 @attributes="Model.InputAttributes">@Model.Text</h3>
+        break;
+    case HeadingLevel.Four:
+        <h4 @attributes="Model.InputAttributes">@Model.Text</h4>
+        break;
+    case HeadingLevel.Five:
+        <h5 @attributes="Model.InputAttributes">@Model.Text</h5>
+        break;
+    case HeadingLevel.Six:
+        <h6 @attributes="Model.InputAttributes">@Model.Text</h6>
+        break;
+    default:
+        break;
+}

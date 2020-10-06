@@ -1,0 +1,19 @@
+﻿@page "/byCode"
+
+<ModelView @ref="@ModelView" Source="ModelToComponent.Data.DataSource.FakeBlogItems" />
+
+@code{
+    public ModelView ModelView { get; set; }
+
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            ModelView.RegisterDefaults();
+            StateHasChanged();
+        }
+        base.OnAfterRender(firstRender);
+    }
+
+}
