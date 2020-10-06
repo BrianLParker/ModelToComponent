@@ -12,4 +12,8 @@ Blazor Model to Component Mapper
 </ModelView>
 ```
 
-
+```
+<ModelView Source="DataSource.NavItems">
+    <ViewRegistration TModel="NavItem" TComponent="NavItemView" />
+</ModelView>
+```
