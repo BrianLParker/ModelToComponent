@@ -27,8 +27,8 @@ namespace ModelToComponent
             var viewModelComponentSelector = new ViewModelComponentSelector();
             viewModelComponentSelector.RegisterDefaults();
             viewModelComponentSelector.RegisterView<NavItem, NavItemView>();
-
             builder.Services.AddScoped<IViewSelector>(sp => viewModelComponentSelector);
+
             await builder.Build().RunAsync();
         }
     }

@@ -44,6 +44,7 @@ In ```program.cs```
     var viewModelComponentSelector = new ViewModelComponentSelector();
     viewModelComponentSelector.RegisterDefaults();
     viewModelComponentSelector.RegisterView<NavItem, NavItemView>();
+    builder.Services.AddScoped<IViewSelector>(sp => viewModelComponentSelector);
 ```
 
 ```
@@ -52,6 +53,9 @@ In ```program.cs```
 
 <ModelView Source="FakeDataSource.BlogItems" />
 ```
+
+produced this:
+
 ![alt text](https://user-images.githubusercontent.com/8317299/95257997-d94d1900-0870-11eb-99f5-832aba33f2f0.png)
 
 
