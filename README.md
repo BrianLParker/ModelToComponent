@@ -52,6 +52,6 @@ In ```program.cs```
 
 <ModelView Source="FakeDataSource.BlogItems" />
 ```
-![alt text](https://github.com/BrianLParker/ModelToComponent/issues/1#issue-716009397)
+![alt text](https://user-images.githubusercontent.com/8317299/95257997-d94d1900-0870-11eb-99f5-832aba33f2f0.png)
 
 
