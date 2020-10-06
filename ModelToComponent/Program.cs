@@ -12,7 +12,6 @@ namespace ModelToComponent
     using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
     using Microsoft.Extensions.DependencyInjection;
     using ModelToComponentMapper.Models;
-    using ModelToComponentMapper.Services;
 
     public class Program
     {

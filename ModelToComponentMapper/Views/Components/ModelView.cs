@@ -19,10 +19,7 @@
         public object Source { get; set; }
 
         private Type GetModelViewComponentType(object obj) => ViewSelector.GetModelViewComponentType(obj);
-        protected override void OnAfterRender(bool firstRender)
-        {
-            base.OnAfterRender(firstRender);
-        }
+        protected override void OnAfterRender(bool firstRender) => base.OnAfterRender(firstRender);
 
         public void RegisterView<TModel, TComponentType>() where TComponentType : ViewComponentBase<TModel>
         {

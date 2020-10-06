@@ -1,11 +1,11 @@
-﻿namespace ModelToComponentMapper.Models
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+﻿// ---------------------------------------------------------------
+// Copyright (c) Brian Parker. All rights reserved.
+// Licensed under the MIT License.
+// See License.txt in the project root for license information.
+// ---------------------------------------------------------------
 
+namespace ModelToComponentMapper.Models
+{
     public class Anchor : BaseElement
     {
         public string Href { get; set; }

@@ -14,7 +14,7 @@
             if (ModelView is null) throw new Exception("ViewDefinition should be defined within a <ModelView>...</ModelView> ");
             if (ModelView.ViewSelector is ViewModelComponentSelector modelViewSelector)
             {
-                ModelView.RegisterView<TModel,TComponent>();
+                ModelView.RegisterView<TModel, TComponent>();
             }
             else
             {

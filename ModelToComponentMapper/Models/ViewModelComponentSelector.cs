@@ -31,10 +31,7 @@ namespace ModelToComponentMapper.Models
             RegisterView<Markup, MarkupView>();
         }
 
-        private void RegisterView(Type modelType, Type componentType)
-        {
-            this.modelViewComponents[modelType.AssemblyQualifiedName] = componentType.AssemblyQualifiedName;
-        }
+        private void RegisterView(Type modelType, Type componentType) => this.modelViewComponents[modelType.AssemblyQualifiedName] = componentType.AssemblyQualifiedName;
 
         private readonly Dictionary<string, string> modelViewComponents = new Dictionary<string, string>();
     }
