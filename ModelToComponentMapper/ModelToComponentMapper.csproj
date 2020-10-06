@@ -2,11 +2,28 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Version>0.9.0.1-alpha</Version>
+    <Authors>Brian Parker</Authors>
+    <Company>Brian Parker</Company>
+    <Product>Model To Component Mapper</Product>
+    <Copyright>Brian Parker</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>icon-144x144.png</PackageIcon>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Description>Renders an object using a component selector passing the model as a parameter. The default selector uses a Type to Type mapping.</Description>
   </PropertyGroup>
 
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0-rc.1.20451.17" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="icon-144x144.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

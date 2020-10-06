@@ -11,6 +11,8 @@ namespace ModelToComponent
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
     using Microsoft.Extensions.DependencyInjection;
+    using ModelToComponent.Models;
+    using ModelToComponent.Views.Components;
     using ModelToComponentMapper.Models;
 
     public class Program
@@ -21,7 +23,12 @@ namespace ModelToComponent
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-            builder.Services.AddScoped<ViewModelComponentSelector>();
+
+            var viewModelComponentSelector = new ViewModelComponentSelector();
+            viewModelComponentSelector.RegisterDefaults();
+            viewModelComponentSelector.RegisterView<NavItem, NavItemView>();
+
+            builder.Services.AddScoped<IViewSelector>(sp => viewModelComponentSelector);
             await builder.Build().RunAsync();
         }
     }

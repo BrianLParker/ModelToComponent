@@ -12,7 +12,7 @@
         [Parameter]
         public RenderFragment ChildContent { get; set; }
 
-        [Parameter]
+        [Inject]
         public IViewSelector ViewSelector { get; set; } = new ViewModelComponentSelector();
 
         [Parameter]
@@ -56,18 +56,18 @@
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
+          
             builder.OpenComponent<CascadingValue<ModelView>>(1);
             builder.AddAttribute(2, "Value", this);
             builder.AddAttribute(3, "ChildContent", ChildContent);
             builder.CloseComponent();
-            int i = 4;
             foreach (object model in models)
             {
                 Type componentType = GetModelViewComponentType(model);
                 if (componentType is not null)
                 {
-                    builder.OpenComponent(i++, componentType);
-                    builder.AddAttribute(i++, "Model", model);
+                    builder.OpenComponent(model.GetHashCode(), componentType);
+                    builder.AddAttribute(model.GetHashCode()+1, "Model", model);
                     builder.CloseComponent();
                 }
             }

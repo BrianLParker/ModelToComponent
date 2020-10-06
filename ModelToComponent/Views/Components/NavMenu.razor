@@ -1,4 +1,6 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
+﻿@using ModelToComponentMapper
+
+<div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">ModelToComponent</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
@@ -7,11 +9,7 @@
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <ul class="nav flex-column">
-      
-        <ModelView Source="DataSource.NavItems">
-            <ViewRegistration TModel="NavItem" TComponent="NavItemView" />
-        </ModelView>
-
+        <ModelView Source="FakeDataSource.NavItems" />
     </ul>
 </div>
 
@@ -24,5 +22,5 @@
     {
         collapseNavMenu = !collapseNavMenu;
     }
-   
+
 }

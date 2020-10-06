@@ -1,6 +1,7 @@
-﻿@page "/byCode"
+﻿@using ModelToComponentMapper
+@page "/byCode"
 
-<ModelView @ref="@ModelView" Source="ModelToComponent.Data.DataSource.FakeBlogItems" />
+<ModelView @ref="@ModelView" Source="ModelToComponent.Data.FakeDataSource.BlogItems" />
 
 @code{
     public ModelView ModelView { get; set; }

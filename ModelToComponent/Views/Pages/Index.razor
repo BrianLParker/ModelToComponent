@@ -1,23 +1,4 @@
-﻿@page "/"
+﻿@using ModelToComponentMapper
+@page "/"
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-
-<ModelView @ref="@ModelView" Source="ModelToComponent.Data.DataSource.FakeBlogItems" />
-@code{
-    public ModelView ModelView { get; set; }
-
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (firstRender)
-        {
-            ModelView.RegisterDefaults();
-            StateHasChanged();
-        }
-        base.OnAfterRender(firstRender);
-    }
-
-}
+<ModelView Source="FakeDataSource.BlogItems" />
