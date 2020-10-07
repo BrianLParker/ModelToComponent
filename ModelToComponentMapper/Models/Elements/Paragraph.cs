@@ -4,7 +4,7 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
-namespace ModelToComponentMapper.Models
+namespace ModelToComponentMapper.Models.Elements
 {
-    public class Markup : BaseElement { }
+    public class Paragraph : BaseElement { }
 }

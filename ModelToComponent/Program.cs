@@ -13,7 +13,7 @@ namespace ModelToComponent
     using Microsoft.Extensions.DependencyInjection;
     using ModelToComponent.Models;
     using ModelToComponent.Views.Components;
-    using ModelToComponentMapper.Models;
+    using ModelToComponentMapper.Models.ViewSelectorModels;
 
     public class Program
     {

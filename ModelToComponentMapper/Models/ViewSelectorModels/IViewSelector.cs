@@ -4,10 +4,12 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
-namespace ModelToComponentMapper.Models
+namespace ModelToComponentMapper.Models.ViewSelectorModels
 {
-    public class Anchor : BaseElement
+    using System;
+
+    public interface IViewSelector
     {
-        public string Href { get; set; }
+        (Type componentType, string propertyName) GetModelViewComponentInfo(object model);
     }
 }

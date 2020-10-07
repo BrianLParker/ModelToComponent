@@ -4,12 +4,7 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
-namespace ModelToComponentMapper.Models
+namespace ModelToComponentMapper.Models.Elements
 {
-    using System;
-
-    public interface IViewSelector
-    {
-        (Type componentType, string propertyName) GetModelViewComponentInfo(object model);
-    }
+    public class Division : BaseElement { }
 }

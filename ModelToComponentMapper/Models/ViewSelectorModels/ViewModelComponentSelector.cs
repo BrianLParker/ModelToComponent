@@ -4,10 +4,11 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
-namespace ModelToComponentMapper.Models
+namespace ModelToComponentMapper.Models.ViewSelectorModels
 {
     using System;
     using System.Collections.Generic;
+    using ModelToComponentMapper.Models.Elements;
     using ModelToComponentMapper.Views.Components;
 
     public class ViewModelComponentSelector : IViewSelector

@@ -4,7 +4,15 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
-namespace ModelToComponentMapper.Models
+namespace ModelToComponentMapper.Models.Elements
 {
-    public class Division : BaseElement { }
+    public enum HeadingLevel
+    {
+        One = 1,
+        Two,
+        Three,
+        Four,
+        Five,
+        Six,
+    }
 }

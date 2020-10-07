@@ -4,13 +4,10 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
-namespace ModelToComponentMapper.Models
+namespace ModelToComponentMapper.Models.Elements
 {
-    using System.Collections.Generic;
-
-    public class BaseElement
+    public class Anchor : BaseElement
     {
-        public Dictionary<string, object> InputAttributes { get; set; }
-        public string Text { get; set; }
+        public string Href { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 {
     using System;
     using Microsoft.AspNetCore.Components;
-    using ModelToComponentMapper.Models;
+    using ModelToComponentMapper.Models.ViewSelectorModels;
 
     public class ViewRegistration<TModel, TComponent> : ComponentBase where TComponent : ComponentBase
     {

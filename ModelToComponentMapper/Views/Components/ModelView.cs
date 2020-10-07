@@ -5,7 +5,7 @@
     using System.Linq;
     using Microsoft.AspNetCore.Components;
     using Microsoft.AspNetCore.Components.Rendering;
-    using ModelToComponentMapper.Models;
+    using ModelToComponentMapper.Models.ViewSelectorModels;
 
     public class ModelView : ComponentBase
     {
