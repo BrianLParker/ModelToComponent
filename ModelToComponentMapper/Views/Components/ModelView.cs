@@ -67,7 +67,7 @@
                 if (componentType is not null)
                 {
                     builder.OpenComponent(model.GetHashCode(), componentType);
-                    builder.AddAttribute(model.GetHashCode()+1, "Model", model);
+                    builder.AddAttribute(model.GetHashCode() +1, "Model", model);
                     builder.CloseComponent();
                 }
             }
