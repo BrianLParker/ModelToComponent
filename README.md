@@ -35,6 +35,14 @@ In ```program.cs```
     viewModelComponentSelector.RegisterView<NavItem, NavItemView>();
     builder.Services.AddScoped<IViewSelector>(sp => viewModelComponentSelector);
 ```
+The previous example could then become:
+
+```
+<ModelView Source="DataSource.NavItems" />
+```
+
+A richer example:
+
 
 ```
 @using ModelToComponentMapper
@@ -77,4 +85,20 @@ from this:
         private const string stackFlare = "<a href=\"https://stackoverflow.com/users/1492496/brian-parker\" target=\"_blank\"><img src=\"https://stackoverflow.com/users/flair/1492496.png?theme=dark\" width=\"208\" height=\"58\" alt=\"profile for Brian Parker at Stack Overflow, Q & A for professional and enthusiast programmers\" title=\"profile for Brian Parker at Stack Overflow, Q & A for professional and enthusiast programmers\"></a>";
 
     }
+```
+
+
+The data source ```Source``` does not have to be enumerable.
+
+```
+@using ModelToComponentMapper
+@using ModelToComponentMapper.Models
+@page "/nonEnumerable"
+
+<ModelView Source="ImageSource" />
+
+@code {
+    ImageSource ImageSource = new ImageSource { Source = FakeDataSource.imageData, DisplayHeight = 259, DisplayWidth = 241 };
+}
+
 ```

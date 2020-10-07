@@ -1,0 +1,9 @@
+﻿@using ModelToComponentMapper
+@using ModelToComponentMapper.Models
+@page "/nonEnumerable"
+
+<ModelView Source="ImageSource" />
+
+@code {
+    ImageSource ImageSource = new ImageSource { Source = FakeDataSource.imageData, DisplayHeight = 259, DisplayWidth = 241 };
+}
