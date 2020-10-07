@@ -12,13 +12,18 @@ namespace ModelToComponentMapper.Models
 
     public class ViewModelComponentSelector : IViewSelector
     {
-        public void RegisterView<TModel, TComponent>(bool defaultView = false) where TComponent : ViewComponentBase<TModel>
-            => RegisterView(typeof(TModel), typeof(TComponent));
+        public void RegisterView<TModel, TComponent>(bool defaultView = false)
+            => RegisterView(typeof(TModel), typeof(TComponent), string.Empty);
 
-        public Type GetModelViewComponentType(object model)
+        public void RegisterView<TModel, TComponent>(string propertyName, bool defaultView = false)
+            => RegisterView(typeof(TModel), typeof(TComponent), propertyName, defaultView);
+
+        public (Type componentType, string propertyName) GetModelViewComponentInfo(object model)
         {
             string assemblyQualifiedName = model.GetType().AssemblyQualifiedName;
-            return this.modelViewComponents.ContainsKey(assemblyQualifiedName) ? Type.GetType(this.modelViewComponents[assemblyQualifiedName]) : null;
+            return this.modelViewComponents.ContainsKey(assemblyQualifiedName) ?
+                (Type.GetType(this.modelViewComponents[assemblyQualifiedName].assemblyQualifiedName), this.modelViewComponents[assemblyQualifiedName].propertyName) :
+                (null, null);
         }
 
         public void RegisterDefaults()
@@ -31,8 +36,11 @@ namespace ModelToComponentMapper.Models
             RegisterView<Markup, MarkupView>();
         }
 
-        private void RegisterView(Type modelType, Type componentType) => this.modelViewComponents[modelType.AssemblyQualifiedName] = componentType.AssemblyQualifiedName;
+        private void RegisterView(Type modelType, Type componentType, string propertyName, bool defaultView = false)
+        {
+            this.modelViewComponents[modelType.AssemblyQualifiedName] = (componentType.AssemblyQualifiedName, propertyName);
+        }
 
-        private readonly Dictionary<string, string> modelViewComponents = new Dictionary<string, string>();
+        private readonly Dictionary<string, (string assemblyQualifiedName, string propertyName)> modelViewComponents = new Dictionary<string, (string assemblyQualifiedName, string propertyName)>();
     }
 }

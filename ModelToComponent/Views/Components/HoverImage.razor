@@ -1,0 +1,11 @@
+﻿@using ModelToComponentMapper.Models
+
+<div class="hover01">
+    <img height="@ImageSource.DisplayHeight" width="@ImageSource.DisplayWidth" src="@ImageSource.Source" />
+</div>
+
+
+@code {
+    [Parameter]
+    public ImageSource ImageSource { get; set; }
+}

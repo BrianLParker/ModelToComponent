@@ -10,6 +10,6 @@ namespace ModelToComponentMapper.Models
 
     public interface IViewSelector
     {
-        Type GetModelViewComponentType(object model);
+        (Type componentType, string propertyName) GetModelViewComponentInfo(object model);
     }
 }

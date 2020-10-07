@@ -18,14 +18,17 @@
         [Parameter]
         public object Source { get; set; }
 
-        private Type GetModelViewComponentType(object obj) => ViewSelector.GetModelViewComponentType(obj);
+        private (Type componentType, string propertyName) GetModelViewComponentInfo(object obj) => ViewSelector.GetModelViewComponentInfo(obj);
         protected override void OnAfterRender(bool firstRender) => base.OnAfterRender(firstRender);
 
-        public void RegisterView<TModel, TComponentType>() where TComponentType : ViewComponentBase<TModel>
+        public void RegisterView<TModel, TComponentType>(string propertyName = "Model")
         {
             if (ViewSelector is ViewModelComponentSelector viewSelector)
             {
-                viewSelector.RegisterView<TModel, TComponentType>();
+                var propertyInfo = typeof(TComponentType).GetProperty(propertyName);
+                if (propertyInfo is null) throw new ArgumentException("(propertyName) Property Not Found!");
+                if (propertyInfo.PropertyType != typeof(TModel)) throw new ArgumentException("Property is not of the correct type (TModel)!");
+                viewSelector.RegisterView<TModel, TComponentType>(propertyName);
                 StateHasChanged();
             }
         }
@@ -63,11 +66,12 @@
             builder.CloseComponent();
             foreach (object model in models)
             {
-                Type componentType = GetModelViewComponentType(model);
+                var viewComponentInfo = GetModelViewComponentInfo(model);
+                Type componentType = viewComponentInfo.componentType;
                 if (componentType is not null)
                 {
                     builder.OpenComponent(model.GetHashCode(), componentType);
-                    builder.AddAttribute(model.GetHashCode() +1, "Model", model);
+                    builder.AddAttribute(model.GetHashCode() +1, string.IsNullOrWhiteSpace(viewComponentInfo.propertyName) ? "Model" : viewComponentInfo.propertyName, model);
                     builder.CloseComponent();
                 }
             }

@@ -1,0 +1,9 @@
+﻿@page "/standardComponent"
+
+<ModelView  Source="ImageSource" >
+    <ViewRegistration TModel="ImageSource" TComponent="HoverImage" PropertyName="ImageSource" />
+</ModelView>
+
+@code {
+    ImageSource ImageSource = new ImageSource { Source = FakeDataSource.imageData, DisplayHeight = 259, DisplayWidth = 241 };
+}
