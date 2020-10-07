@@ -102,3 +102,16 @@ The data source ```Source``` does not have to be enumerable.
 }
 
 ```
+
+
+## You do not have you use the ```ViewComponentBase``` base class.
+However the component should accept a parameter of type TModel. The name of the property can be specified via the PropertyName attribute.
+
+```
+
+<ModelView  Source="ImageSource" >
+    <ViewRegistration TModel="ImageSource" TComponent="HoverImage" PropertyName="ImageSource" />
+</ModelView>
+
+
+```
