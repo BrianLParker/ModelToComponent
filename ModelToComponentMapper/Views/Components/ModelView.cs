@@ -1,4 +1,10 @@
-﻿namespace ModelToComponentMapper
+﻿// ---------------------------------------------------------------
+// Copyright (c) Brian Parker. All rights reserved.
+// Licensed under the MIT License.
+// See License.txt in the project root for license information.
+// ---------------------------------------------------------------
+
+namespace ModelToComponentMapper
 {
     using System;
     using System.Collections.Generic;
@@ -25,7 +31,7 @@
         {
             if (ViewSelector is ViewModelComponentSelector viewSelector)
             {
-                var propertyInfo = typeof(TComponentType).GetProperty(propertyName);
+                System.Reflection.PropertyInfo propertyInfo = typeof(TComponentType).GetProperty(propertyName);
                 if (propertyInfo is null) throw new ArgumentException("(propertyName) Property Not Found!");
                 if (propertyInfo.PropertyType != typeof(TModel)) throw new ArgumentException("Property is not of the correct type (TModel)!");
                 viewSelector.RegisterView<TModel, TComponentType>(propertyName);
@@ -59,19 +65,21 @@
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-          
-            builder.OpenComponent<CascadingValue<ModelView>>(1);
-            builder.AddAttribute(2, "Value", this);
-            builder.AddAttribute(3, "ChildContent", ChildContent);
+
+            builder.OpenComponent<CascadingValue<ModelView>>(0);
+            builder.AddAttribute(1, "Value", this);
+            builder.AddAttribute(2, "ChildContent", ChildContent);
             builder.CloseComponent();
             foreach (object model in models)
             {
-                var viewComponentInfo = GetModelViewComponentInfo(model);
+                (Type componentType, string propertyName) viewComponentInfo = GetModelViewComponentInfo(model);
                 Type componentType = viewComponentInfo.componentType;
                 if (componentType is not null)
                 {
-                    builder.OpenComponent(model.GetHashCode(), componentType);
-                    builder.AddAttribute(model.GetHashCode() +1, string.IsNullOrWhiteSpace(viewComponentInfo.propertyName) ? "Model" : viewComponentInfo.propertyName, model);
+                    var propertyName = string.IsNullOrWhiteSpace(viewComponentInfo.propertyName) ? "Model" : viewComponentInfo.propertyName;
+                    builder.OpenComponent(0, componentType);
+                    builder.AddAttribute(1, propertyName, model);
+                    builder.SetKey(model);
                     builder.CloseComponent();
                 }
             }

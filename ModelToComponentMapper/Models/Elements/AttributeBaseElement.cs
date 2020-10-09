@@ -6,10 +6,10 @@
 
 namespace ModelToComponentMapper.Models.Elements
 {
-    public class Anchor : AttributeBaseElement
-    {
-        public string Text { get; set; }
+    using System.Collections.Generic;
 
-        public string Href { get; set; }
+    public class AttributeBaseElement : BaseElement
+    {
+        public Dictionary<string, object> InputAttributes { get; set; }
     }
 }

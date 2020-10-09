@@ -1,9 +1,11 @@
 ﻿@page "/standardComponent"
 
-<ModelView  Source="ImageSource" >
-    <ViewRegistration TModel="ImageSource" TComponent="HoverImage" PropertyName="ImageSource" />
-</ModelView>
+
+    <ModelView Source="ImageSource">
+        <ViewRegistration TModel="ImageSource" TComponent="HoverImage" PropertyName="ImageSource" />
+    </ModelView>
+
 
 @code {
-    ImageSource ImageSource = new ImageSource { Source = FakeDataSource.imageData, DisplayHeight = 259, DisplayWidth = 241 };
+    ImageSource ImageSource = new ImageSource { Source = FakeDataSource.imageData, DisplayHeight = 259, DisplayWidth = 241, InputAttributes = new Dictionary<string, object>() { { "class", "shadow-lg p-3 mb-5 bg-white rounded hover01 d-inline-block" } } };
 }

@@ -6,8 +6,10 @@
 
 namespace ModelToComponentMapper.Models.Elements
 {
-    public class Heading : BaseElement
+    public class Heading : AttributeBaseElement
     {
+        public string Text { get; set; }
+
         public HeadingLevel Level { get; set; }
     }
 }

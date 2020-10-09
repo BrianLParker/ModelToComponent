@@ -6,5 +6,8 @@
 
 namespace ModelToComponentMapper.Models.Elements
 {
-    public class Paragraph : BaseElement { }
+    public class Paragraph : AttributeBaseElement
+    {
+        public string Text { get; set; }
+    }
 }

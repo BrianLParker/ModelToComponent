@@ -6,7 +6,7 @@
 
 namespace ModelToComponentMapper.Models.Elements
 {
-    public class ImageSource : BaseElement
+    public class ImageSource : AttributeBaseElement
     {
         public string Source { get; set; }
 

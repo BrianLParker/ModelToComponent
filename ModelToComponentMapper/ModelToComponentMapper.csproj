@@ -13,11 +13,9 @@
     <Description>Renders an object using a component selector passing the model as a parameter. The default selector uses a Type to Type mapping.</Description>
   </PropertyGroup>
 
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0-rc.1.20451.17" />
   </ItemGroup>
-
 
   <ItemGroup>
     <None Include="icon-144x144.png">

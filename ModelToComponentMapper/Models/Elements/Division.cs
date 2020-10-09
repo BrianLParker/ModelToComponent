@@ -6,5 +6,8 @@
 
 namespace ModelToComponentMapper.Models.Elements
 {
-    public class Division : BaseElement { }
+    public class Division : AttributeBaseElement
+    {
+        public string Text { get; set; }
+    }
 }

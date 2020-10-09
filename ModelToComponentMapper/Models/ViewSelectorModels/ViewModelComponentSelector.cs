@@ -35,6 +35,7 @@ namespace ModelToComponentMapper.Models.ViewSelectorModels
             RegisterView<ImageSource, ImageSourceView>();
             RegisterView<Anchor, AnchorView>();
             RegisterView<Markup, MarkupView>();
+            RegisterView<Break, BreakView>();
         }
 
         private void RegisterView(Type modelType, Type componentType, string propertyName, bool defaultView = false)

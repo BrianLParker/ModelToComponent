@@ -6,5 +6,8 @@
 
 namespace ModelToComponentMapper.Models.Elements
 {
-    public class Markup : BaseElement { }
+    public class Markup : BaseElement
+    {
+        public string RawHtml { get; set; }
+    }
 }

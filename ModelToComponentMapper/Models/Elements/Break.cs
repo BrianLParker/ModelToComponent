@@ -6,10 +6,7 @@
 
 namespace ModelToComponentMapper.Models.Elements
 {
-    public class Anchor : AttributeBaseElement
+    public class Break : BaseElement
     {
-        public string Text { get; set; }
-
-        public string Href { get; set; }
     }
 }
