@@ -15,16 +15,30 @@ namespace ModelToComponentMapper
 
     public class ModelView : ComponentBase
     {
+        [Inject]
+        public IViewSelector DefaultViewSelector { get; set; }
+
+        [Parameter]
+        public IViewSelector ViewSelector { get; set; } = new ViewModelComponentSelector();
+
         [Parameter]
         public RenderFragment ChildContent { get; set; }
-
-        [Inject]
-        public IViewSelector ViewSelector { get; set; } = new ViewModelComponentSelector();
 
         [Parameter]
         public object Source { get; set; }
 
-        private (Type componentType, string propertyName) GetModelViewComponentInfo(object obj) => ViewSelector.GetModelViewComponentInfo(obj);
+        private (Type componentType, string propertyName) GetModelViewComponentInfo(object model)
+        {
+            (Type componentType, string propertyName) viewComponentInfo = ViewSelector.GetModelViewComponentInfo(model);
+            if (viewComponentInfo == (null, null))
+            {
+                viewComponentInfo = DefaultViewSelector.GetModelViewComponentInfo(model);
+            }
+
+            return viewComponentInfo;
+
+        }
+
         protected override void OnAfterRender(bool firstRender) => base.OnAfterRender(firstRender);
 
         public void RegisterView<TModel, TComponentType>(string propertyName = "Model")
@@ -70,15 +84,17 @@ namespace ModelToComponentMapper
             builder.AddAttribute(1, "Value", this);
             builder.AddAttribute(2, "ChildContent", ChildContent);
             builder.CloseComponent();
+            int i = 3;
             foreach (object model in models)
             {
                 (Type componentType, string propertyName) viewComponentInfo = GetModelViewComponentInfo(model);
+
                 Type componentType = viewComponentInfo.componentType;
                 if (componentType is not null)
                 {
-                    var propertyName = string.IsNullOrWhiteSpace(viewComponentInfo.propertyName) ? "Model" : viewComponentInfo.propertyName;
-                    builder.OpenComponent(0, componentType);
-                    builder.AddAttribute(1, propertyName, model);
+                    string propertyName = string.IsNullOrWhiteSpace(viewComponentInfo.propertyName) ? "Model" : viewComponentInfo.propertyName;
+                    builder.OpenComponent(i++, componentType);
+                    builder.AddAttribute(i++, propertyName, model);
                     builder.SetKey(model);
                     builder.CloseComponent();
                 }

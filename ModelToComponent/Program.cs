@@ -24,12 +24,17 @@ namespace ModelToComponent
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-            var viewModelComponentSelector = new ViewModelComponentSelector();
+            ConfigureDefaultViewModelSelector(builder);
+
+            await builder.Build().RunAsync();
+        }
+
+        private static void ConfigureDefaultViewModelSelector(WebAssemblyHostBuilder builder)
+        {
+            ViewModelComponentSelector viewModelComponentSelector = new ViewModelComponentSelector();
             viewModelComponentSelector.RegisterDefaults();
             viewModelComponentSelector.RegisterView<NavItem, NavItemView>();
             builder.Services.AddScoped<IViewSelector>(sp => viewModelComponentSelector);
-
-            await builder.Build().RunAsync();
         }
     }
 }

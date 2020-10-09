@@ -1,13 +1,10 @@
 # Model to Component Mapper
-Blazor Model to Component Mapper
+Blazor Model to Component Mapper. Maps a class to a blazor component. The component must have a parameter that accepts the model.
 
 ## Example Component
 ```NavItemView.razor```
 
-Note the inheritance of ```ViewComponentBase``` and the use the @Model. Future release will not require the use of a base class but a known property name that is of type TModel
-
 ```
-@using ModelToComponentMapper
 @inherits ViewComponentBase<NavItem>
 <li class="nav-item px-3">
     <NavLink class="nav-link" href="@Model.Href" Match="@Model.NavLinkMatch">
@@ -16,6 +13,7 @@ Note the inheritance of ```ViewComponentBase``` and the use the @Model. Future r
 </li>
 ```
 
+The library provides a base component ``` ViewComponentBase ``` that can be inherited instead of ``` ComponentBase ``` . This is a convenient way of implementing the required property with the parameter name ``` Model ``` .
 
 ## Usage
 This is overkill for only one model type it is just an example of view registration within a .razor component.
@@ -25,16 +23,31 @@ This is overkill for only one model type it is just an example of view registrat
 </ModelView>
 ```
 
-
 You can register all your components in program.cs (Functionality not complete. Registration here should only be defaults that can be over written not replaced.)
 In ```program.cs``` 
 
 ```
-    var viewModelComponentSelector = new ViewModelComponentSelector();
-    viewModelComponentSelector.RegisterDefaults();
-    viewModelComponentSelector.RegisterView<NavItem, NavItemView>();
-    builder.Services.AddScoped<IViewSelector>(sp => viewModelComponentSelector);
-```
+    public class Program
+    {
+        public static async Task Main(string[] args)
+        {
+           ...
+
+            ConfigureDefaultViewModelSelector(builder);
+
+            ...
+        }
+
+        private static void ConfigureDefaultViewModelSelector(WebAssemblyHostBuilder builder)
+        {
+            ViewModelComponentSelector viewModelComponentSelector = new ViewModelComponentSelector();
+            viewModelComponentSelector.RegisterDefaults();
+            viewModelComponentSelector.RegisterView<NavItem, NavItemView>();
+            builder.Services.AddScoped<IViewSelector>(sp => viewModelComponentSelector);
+        }
+    }
+ ```
+
 The previous example could then become:
 
 ```
@@ -91,27 +104,10 @@ from this:
 The data source ```Source``` does not have to be enumerable.
 
 ```
-@using ModelToComponentMapper
-@using ModelToComponentMapper.Models
-@page "/nonEnumerable"
-
 <ModelView Source="ImageSource" />
 
 @code {
     ImageSource ImageSource = new ImageSource { Source = FakeDataSource.imageData, DisplayHeight = 259, DisplayWidth = 241 };
 }
-
-```
-
-
-## You do not have you use the ```ViewComponentBase``` base class.
-However the component should accept a parameter of type TModel. The name of the property can be specified via the PropertyName attribute.
-
-```
-
-<ModelView  Source="ImageSource" >
-    <ViewRegistration TModel="ImageSource" TComponent="HoverImage" PropertyName="ImageSource" />
-</ModelView>
-
 
 ```
