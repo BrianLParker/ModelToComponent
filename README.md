@@ -1,5 +1,5 @@
 # Model to Component Mapper
-Blazor Model to Component Mapper. Maps a class to a blazor component. The component must have a parameter that accepts the model.
+Blazor model to component mapper. Maps a class to a blazor component. The component must have a parameter that accepts the model.
 
 ## Example Component
 ```NavItemView.razor```
@@ -58,7 +58,6 @@ A richer example:
 
 
 ```
-@using ModelToComponentMapper
 @page "/"
 
 <ModelView Source="FakeDataSource.BlogItems" />
