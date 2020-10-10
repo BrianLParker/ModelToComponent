@@ -1,5 +1,5 @@
 # Model to Component Mapper
-Blazor model to component mapper. Maps a class to a blazor component. The component must have a parameter that accepts the model.
+Blazor model to component mapper. Maps a class to a blazor component. The component must have a parameter that accepts the model. This can allow an application to be completely data driven.
 
 ## Example:
 
@@ -10,12 +10,12 @@ Blazor model to component mapper. Maps a class to a blazor component. The compon
 <ModelView Source="FakeDataSource.BlogItems" />
 ```
 
-### produced this:
+### Output:
 
 ![alt text](https://user-images.githubusercontent.com/8317299/95257997-d94d1900-0870-11eb-99f5-832aba33f2f0.png)
 
 
-### from this:
+### Input data source:
 
 ```DataSource.cs```
 
@@ -24,20 +24,24 @@ Blazor model to component mapper. Maps a class to a blazor component. The compon
     {
         public static readonly IReadOnlyList<object> BlogItems = new object[]
         {
-            new Heading { Text = "Hello World!", Level= HeadingLevel.One },
-            new Division { Text = "Welcome to my" },
-            new Anchor { Text = "My Website.", Href ="https://brianparker.azurewebsites.net/" },
-            new Division { Text = "All these items are being rendered based on their data type and order from an enumerable object source" },
-            new ImageSource { DisplayHeight=259, DisplayWidth=241, Source = imageData },
-            new Division { Text = "Pretty cool, huh?" },
-            new Markup { Text = stackFlare }
+            new Heading { Text = "Hello World!", Level= HeadingLevel.One , InputAttributes = new Dictionary<string, object>() { { "class", "text-info" } } },
+            new Paragraph { Text = "Welcome to my demonstration" },
+            new Paragraph { Text = "All these items are being rendered based on their data type and order from an enumerable object source" },
+            new ImageSource { DisplayHeight = 259, DisplayWidth = 241, Source = imageData, InputAttributes = new Dictionary<string, object>() { { "class", "shadow-lg p-3 mb-5 bg-white rounded" } }  },
+            new Paragraph { Text = "Pretty cool, huh?" },
+            new Anchor { Text = "Brian Parker", Href = "https://brianparker.azurewebsites.net/" },
+            new Break { },
+            new Markup { RawHtml = stackFlare },
         };
 
         public static readonly IReadOnlyList<object> NavItems = new object[]
         {
             new NavItem { Text = "Home", Icon ="oi oi-home" , Href ="" , NavLinkMatch = NavLinkMatch.All },
-            new NavItem { Text = "By Layout", Icon ="oi oi-code" , Href ="byLayout" },
-            new NavItem { Text = "By Code", Icon ="oi oi-excerpt" , Href ="byCode" }
+            new NavItem { Text = "By Mark-up", Icon ="oi oi-code" , Href ="byLayout" },
+            new NavItem { Text = "By Code", Icon ="oi oi-excerpt" , Href ="byCode" },
+            new NavItem { Text = "Non Enumerable", Icon ="oi oi-image" , Href ="nonEnumerable" },
+            new NavItem { Text = "Standard Component", Icon ="oi oi-image" , Href ="standardComponent" },
+            new NavItem { Text = "Registration Error", Icon ="oi oi-bug" , Href ="registrationError" },            
         };
 
         private const string imageData = "data:image/jpeg; base64, (truncated)";
@@ -75,7 +79,7 @@ The data source ```Source``` does not have to be enumerable.
 }
 ```
 ### Usage
-This is overkill for only one model type it is just an example of view registration within a .razor component.
+This is overkill for only one model type it is just an example of view registration using mark-up within a .razor component.
 ```
 <ModelView Source="DataSource.NavItems">
     <ViewRegistration TModel="NavItem" TComponent="NavItemView" PropertyName="NavItem" />
@@ -104,7 +108,7 @@ This is overkill for only one model type it is just an example of view registrat
 Note: PropertyName is defaulted to "Model". It does not have to be declared when using ``` ViewComponentBase ```
 
 
-You can register all your components in program.cs
+You can register all your components in ``` program.cs ```. These become the default components. Any components defined within the ``` <ModelView> ``` mark-up override the default components.
 In ```program.cs``` 
 
 ```
