@@ -84,7 +84,6 @@ namespace ModelToComponentMapper
             builder.AddAttribute(1, "Value", this);
             builder.AddAttribute(2, "ChildContent", ChildContent);
             builder.CloseComponent();
-            int i = 3;
             foreach (object model in models)
             {
                 (Type componentType, string propertyName) viewComponentInfo = GetModelViewComponentInfo(model);
@@ -93,8 +92,8 @@ namespace ModelToComponentMapper
                 if (componentType is not null)
                 {
                     string propertyName = string.IsNullOrWhiteSpace(viewComponentInfo.propertyName) ? "Model" : viewComponentInfo.propertyName;
-                    builder.OpenComponent(i++, componentType);
-                    builder.AddAttribute(i++, propertyName, model);
+                    builder.OpenComponent(3, componentType);
+                    builder.AddAttribute(4, propertyName, model);
                     builder.SetKey(model);
                     builder.CloseComponent();
                 }
