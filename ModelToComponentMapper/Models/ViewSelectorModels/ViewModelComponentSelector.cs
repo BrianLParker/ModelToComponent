@@ -14,7 +14,7 @@ namespace ModelToComponentMapper.Models.ViewSelectorModels
     public class ViewModelComponentSelector : IViewSelector
     {
         public void RegisterView<TModel, TComponent>(bool defaultView = false)
-            => RegisterView(typeof(TModel), typeof(TComponent), string.Empty);
+            => RegisterView(typeof(TModel), typeof(TComponent), "Model");
 
         public void RegisterView<TModel, TComponent>(string propertyName, bool defaultView = false)
             => RegisterView(typeof(TModel), typeof(TComponent), propertyName, defaultView);

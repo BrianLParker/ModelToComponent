@@ -12,6 +12,7 @@ namespace ModelToComponentMapper
     using Microsoft.AspNetCore.Components;
     using Microsoft.AspNetCore.Components.Rendering;
     using ModelToComponentMapper.Models.ViewSelectorModels;
+    using ModelToComponentMapper.Views.Components;
 
     public class ModelView : ComponentBase
     {
@@ -33,6 +34,11 @@ namespace ModelToComponentMapper
             if (viewComponentInfo == (null, null))
             {
                 viewComponentInfo = DefaultViewSelector.GetModelViewComponentInfo(model);
+            }
+
+            if (viewComponentInfo == (null, null))
+            {
+                viewComponentInfo = new(typeof(ComponentNotRegistered), "Model");
             }
 
             return viewComponentInfo;
@@ -86,17 +92,15 @@ namespace ModelToComponentMapper
             builder.CloseComponent();
             foreach (object model in models)
             {
-                (Type componentType, string propertyName) viewComponentInfo = GetModelViewComponentInfo(model);
-
-                Type componentType = viewComponentInfo.componentType;
-                if (componentType is not null)
+                if (model is not null)
                 {
-                    string propertyName = string.IsNullOrWhiteSpace(viewComponentInfo.propertyName) ? "Model" : viewComponentInfo.propertyName;
-                    builder.OpenComponent(3, componentType);
-                    builder.AddAttribute(4, propertyName, model);
+                    (Type componentType, string propertyName) viewComponentInfo = GetModelViewComponentInfo(model);
+                    builder.OpenComponent(3, viewComponentInfo.componentType);
+                    builder.AddAttribute(4, viewComponentInfo.propertyName, model);
                     builder.SetKey(model);
                     builder.CloseComponent();
                 }
+
             }
             base.BuildRenderTree(builder);
         }
