@@ -9,7 +9,7 @@ namespace ModelToComponentMapper.Models.ViewSelectorModels
     using System;
     using System.Collections.Generic;
     using ModelToComponentMapper.Models.Elements;
-    using ModelToComponentMapper.Views.Components;
+   // using ModelToComponentMapper.Views.Components;
 
     public class ViewModelComponentSelector : IViewSelector
     {
@@ -42,6 +42,7 @@ namespace ModelToComponentMapper.Models.ViewSelectorModels
         {
             this.modelViewComponents[modelType.AssemblyQualifiedName] = (componentType.AssemblyQualifiedName, propertyName);
         }
+      
 
         private readonly Dictionary<string, (string assemblyQualifiedName, string propertyName)> modelViewComponents = new Dictionary<string, (string assemblyQualifiedName, string propertyName)>();
     }

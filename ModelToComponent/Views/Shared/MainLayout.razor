@@ -1,16 +1,8 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<LayoutModelView Source="ApplicationView" Body="Body"/>
 
-    <div class="main">
-        <div class="top-row px-4">
-        </div>
-
-        <div class="content px-4">
-            @Body
-        </div>
-    </div>
-</div>
+@code {
+    [Inject]
+    IApplicationView ApplicationView { get; set; }
+}

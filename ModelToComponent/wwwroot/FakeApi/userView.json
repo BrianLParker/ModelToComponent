@@ -1,0 +1,45 @@
+{
+  "UserView": {
+    "NavigationView": {
+      "Title": "Model to Component",
+      "NavigationItems": [
+        {
+          "Text": "Home",
+          "Icon": "oi oi-home",
+          "Href": "\\",
+          "NavLinkMatch": "All"
+        },
+        {
+          "Text": "By Mark-up",
+          "Icon": "oi oi-code",
+          "Href": "byLayout",
+          "NavLinkMatch": "Prefix"
+        },
+        {
+          "Text": "By Code",
+          "Icon": "oi oi-excerpt",
+          "Href": "byCode",
+          "NavLinkMatch": "Prefix"
+        },
+        {
+          "Text": "Non Enumerable",
+          "Icon": "oi oi-image",
+          "Href": "nonEnumerable",
+          "NavLinkMatch": "Prefix"
+        },
+        {
+          "Text": "Standard Component",
+          "Icon": "oi oi-image",
+          "Href": "standardComponent",
+          "NavLinkMatch": "Prefix"
+        },
+        {
+          "Text": "Registration Error",
+          "Icon": "oi oi-bug",
+          "Href": "registrationError",
+          "NavLinkMatch": "Prefix"
+        }
+      ]
+    }
+  }
+}

@@ -1,7 +1,7 @@
-﻿@using ModelToComponentMapper
+﻿@inherits ViewComponentBase<NavigationView>
 
 <div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">Model to Component</a>
+    <a class="navbar-brand" href="">@Model.Title</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,11 +9,13 @@
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <ul class="nav flex-column">
-        <ModelView Source="FakeDataSource.NavItems" />
+        <ModelView Source="Model.NavigationItems" />
     </ul>
 </div>
 
 @code {
+    
+
     private bool collapseNavMenu = true;
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;

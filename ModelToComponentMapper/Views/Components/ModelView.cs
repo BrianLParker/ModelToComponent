@@ -12,7 +12,7 @@ namespace ModelToComponentMapper
     using Microsoft.AspNetCore.Components;
     using Microsoft.AspNetCore.Components.Rendering;
     using ModelToComponentMapper.Models.ViewSelectorModels;
-    using ModelToComponentMapper.Views.Components;
+    // using ModelToComponentMapper.Views.Components;
 
     public class ModelView : ComponentBase
     {
@@ -28,7 +28,7 @@ namespace ModelToComponentMapper
         [Parameter]
         public object Source { get; set; }
 
-        private (Type componentType, string propertyName) GetModelViewComponentInfo(object model)
+        protected (Type componentType, string propertyName) GetModelViewComponentInfo(object model)
         {
             (Type componentType, string propertyName) viewComponentInfo = ViewSelector.GetModelViewComponentInfo(model);
             if (viewComponentInfo == (null, null))
@@ -68,7 +68,7 @@ namespace ModelToComponentMapper
         }
         private bool IsEnumerable => Source as System.Collections.IEnumerable is not null;
 
-        private IEnumerable<object> models
+        protected IEnumerable<object> models
         {
             get
             {
@@ -96,7 +96,7 @@ namespace ModelToComponentMapper
                 {
                     (Type componentType, string propertyName) viewComponentInfo = GetModelViewComponentInfo(model);
                     builder.OpenComponent(3, viewComponentInfo.componentType);
-                    builder.AddAttribute(4, viewComponentInfo.propertyName, model);
+                    builder.AddAttribute(4, viewComponentInfo.propertyName, model);                  
                     builder.SetKey(model);
                     builder.CloseComponent();
                 }
@@ -105,6 +105,4 @@ namespace ModelToComponentMapper
             base.BuildRenderTree(builder);
         }
     }
-
-
 }
