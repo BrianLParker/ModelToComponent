@@ -1,0 +1,14 @@
+﻿@using System.Reflection
+[@this.AssemblyVersion]
+@code {
+    public string AssemblyVersion { get; private set; }
+
+    protected override void OnInitialized()
+    {
+        AssemblyVersion = Assembly.GetExecutingAssembly()
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+            .InformationalVersion;
+
+        base.OnInitialized();
+    }
+}

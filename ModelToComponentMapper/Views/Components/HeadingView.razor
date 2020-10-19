@@ -2,22 +2,22 @@
 @switch (Model.Level)
 {
     case HeadingLevel.One:
-        <h1 @attributes="Model.InputAttributes">@Model.Text</h1>
+        <h1 @attributes="Model.InputAttributes"><ModelView Source="@Model.Content" /></h1>
         break;
     case HeadingLevel.Two:
-        <h2 @attributes="Model.InputAttributes">@Model.Text</h2>
+        <h2 @attributes="Model.InputAttributes"><ModelView Source="@Model.Content" /></h2>
         break;
     case HeadingLevel.Three:
-        <h3 @attributes="Model.InputAttributes">@Model.Text</h3>
+        <h3 @attributes="Model.InputAttributes"><ModelView Source="@Model.Content" /></h3>
         break;
     case HeadingLevel.Four:
-        <h4 @attributes="Model.InputAttributes">@Model.Text</h4>
+        <h4 @attributes="Model.InputAttributes"><ModelView Source="@Model.Content" /></h4>
         break;
     case HeadingLevel.Five:
-        <h5 @attributes="Model.InputAttributes">@Model.Text</h5>
+        <h5 @attributes="Model.InputAttributes"><ModelView Source="@Model.Content" /></h5>
         break;
     case HeadingLevel.Six:
-        <h6 @attributes="Model.InputAttributes">@Model.Text</h6>
+        <h6 @attributes="Model.InputAttributes"><ModelView Source="@Model.Content" /></h6>
         break;
     default:
         break;

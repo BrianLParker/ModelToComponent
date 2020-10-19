@@ -7,12 +7,12 @@
 namespace ModelToComponentMapper
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.AspNetCore.Components;
     using Microsoft.AspNetCore.Components.Rendering;
     using ModelToComponentMapper.Models.ViewSelectorModels;
-    // using ModelToComponentMapper.Views.Components;
 
     public class ModelView : ComponentBase
     {
@@ -27,6 +27,7 @@ namespace ModelToComponentMapper
 
         [Parameter]
         public object Source { get; set; }
+
 
         protected (Type componentType, string propertyName) GetModelViewComponentInfo(object model)
         {
@@ -66,8 +67,8 @@ namespace ModelToComponentMapper
                 viewSelector.RegisterDefaults();
             }
         }
-        private bool IsEnumerable => Source as System.Collections.IEnumerable is not null;
 
+        private bool IsEnumerable => (Source is not string) && (Source is IEnumerable);
         protected IEnumerable<object> models
         {
             get
@@ -82,27 +83,28 @@ namespace ModelToComponentMapper
                 }
             }
         }
-
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-
-            builder.OpenComponent<CascadingValue<ModelView>>(0);
-            builder.AddAttribute(1, "Value", this);
-            builder.AddAttribute(2, "ChildContent", ChildContent);
-            builder.CloseComponent();
+            if (ChildContent is not null)
+            {
+                builder.OpenComponent<CascadingValue<ModelView>>(0);
+                builder.AddAttribute(1, "Value", this);
+                builder.AddAttribute(2, "ChildContent", ChildContent);
+                builder.CloseComponent();
+            }
             foreach (object model in models)
             {
-                if (model is not null)
-                {
-                    (Type componentType, string propertyName) viewComponentInfo = GetModelViewComponentInfo(model);
-                    builder.OpenComponent(3, viewComponentInfo.componentType);
-                    builder.AddAttribute(4, viewComponentInfo.propertyName, model);                  
-                    builder.SetKey(model);
-                    builder.CloseComponent();
-                }
-
+                RenderModelView(builder, model);
             }
             base.BuildRenderTree(builder);
+        }
+
+        private void RenderModelView(RenderTreeBuilder builder, object model)
+        {
+            (Type componentType, string propertyName) = GetModelViewComponentInfo(model);
+            builder.OpenComponent(1, componentType);
+            builder.AddAttribute(2, propertyName, model);
+            builder.CloseComponent();
         }
     }
 }

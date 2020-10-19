@@ -25,7 +25,7 @@ Blazor model to component mapper. Maps a class to a blazor component. The compon
         public static readonly IReadOnlyList<object> BlogItems = new object[]
         {
             new Heading { Text = "Hello World!", Level= HeadingLevel.One , InputAttributes = new Dictionary<string, object>() { { "class", "text-info" } } },
-            new Paragraph { Text = "Welcome to my demonstration" },
+            new Division { Content =  new Paragraph { Content = "Welcome to my demonstration" } },
             new Paragraph { Text = "All these items are being rendered based on their data type and order from an enumerable object source" },
             new ImageSource { DisplayHeight = 259, DisplayWidth = 241, Source = imageData, InputAttributes = new Dictionary<string, object>() { { "class", "shadow-lg p-3 mb-5 bg-white rounded" } }  },
             new Paragraph { Text = "Pretty cool, huh?" },

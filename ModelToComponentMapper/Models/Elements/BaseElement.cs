@@ -9,4 +9,20 @@ namespace ModelToComponentMapper.Models.Elements
     public class BaseElement
     {
     }
+
+    interface IContentBase  { }
+
+    interface ITextContent : IContentBase
+    {
+        string Text { get; }
+    }
+    interface IMarkupContent : IContentBase
+    {
+        string Markup { get; }
+    }
+
+    interface IComponentContent : IContentBase
+    {
+        object Content { get; }
+    }
 }

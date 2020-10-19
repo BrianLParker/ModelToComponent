@@ -1,8 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <Version>1.0.1.0</Version>
+    <Version>1.0.2.9-dev0013</Version>
     <Authors>Brian Parker</Authors>
     <Company>Brian Parker</Company>
     <Product>Model To Component Mapper</Product>
@@ -10,16 +11,28 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>icon-144x144.png</PackageIcon>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Description>Renders an object using a component selector passing the model as a parameter. The default selector uses a Type to Type mapping.</Description>
-    <PackageReleaseNotes>Render loop performance improvements.
-Handles models not registered</PackageReleaseNotes>
+    <Description>Renders an object using a component selector passing the model as a parameter. The default selector uses a Type to Component Type mapping aka MVVM.</Description>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <RepositoryUrl>https://github.com/BrianLParker/ModelToComponent</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0-rc.2.20475.17" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" />
+    <PackageReference Include="MSBump" Version="2.3.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
-
+  
+  <PropertyGroup Condition="$(Configuration) == 'Debug'">
+    <BumpLabel>dev</BumpLabel>
+    <BumpLabelDigits>4</BumpLabelDigits>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(Configuration) == 'Release'">
+    <BumpRevision>True</BumpRevision>
+    <BumpResetLabel>dev</BumpResetLabel>
+  </PropertyGroup>
+  
   <ItemGroup>
     <None Include="icon-144x144.png">
       <Pack>True</Pack>

@@ -4,10 +4,15 @@
 // See License.txt in the project root for license information.
 // ---------------------------------------------------------------
 
+using System;
+
 namespace ModelToComponentMapper.Models.Elements
 {
     public class Division : AttributeBaseElement
     {
-        public string Text { get; set; }
+        public object Content { get; set; }
+
+        [Obsolete("Text is obsolete switch to Content")]
+        public string Text { get => (string)Content; set => Content = value; }
     }
 }
