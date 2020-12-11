@@ -104,6 +104,10 @@ namespace ModelToComponentMapper
             (Type componentType, string propertyName) = GetModelViewComponentInfo(model);
             builder.OpenComponent(1, componentType);
             builder.AddAttribute(2, propertyName, model);
+            if (model.GetType().IsClass)
+            {
+            builder.SetKey(model);
+            }
             builder.CloseComponent();
         }
     }
